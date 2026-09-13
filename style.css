@@ -588,7 +588,7 @@ body {
     /* Sets a fixed width for the GIF */
     height: 90px;
     /* Sets a fixed height for the GIF */
-    background-image: url("./gif/sad-cry.gif");
+    background-image: url("sad-cry.gif");
     /* Uses the smaller, cute crying GIF as the background image (path relative to the CSS file's folder) */
     background-size: cover;
     /* Makes the GIF cover the entire area without distortion */
