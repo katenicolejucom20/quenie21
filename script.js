@@ -63,10 +63,10 @@
 
   function cacheGifs() { /* Defines a function that preloads all the GIF files into the browser's memory/cache so they appear instantly */
     const gifs = [ /* An array of the GIF image paths used across the app */
-      "gif/dudu-flow-kiss-cute-dudu.gif", /* The kiss GIF for the date/time steps */
-      "gif/cuddle-cute.gif", /* The hug GIF for the success page */
-      "gif/sad-cry.gif", /* The crying GIF for the "No" button messages */
-      "gif/bubu-dudu.gif" /* The extra cute GIF */
+      "dudu-flow-kiss-cute-dudu.gif", /* The kiss GIF for the date/time steps */
+      "cuddle-cute.gif", /* The hug GIF for the success page */
+      "sad-cry.gif", /* The crying GIF for the "No" button messages */
+      "bubu-dudu.gif" /* The extra cute GIF */
     ];
     gifs.forEach((src) => { /* Loops through every GIF path */
       const img = new Image(); /* Creates a new in-memory Image object (this triggers the browser to load/cache the file) */
