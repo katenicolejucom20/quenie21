@@ -1,7 +1,7 @@
 (() => { /* Immediately Invoked Function Expression (IIFE): this function runs right away when the script loads. Wrapping everything in an IIFE keeps our variables out of the global scope so they don't clash with other scripts. */
   "use strict"; /* Enables JavaScript's strict mode, which catches common coding mistakes and prevents silent errors */
 
-  // ============ DATA ============ /* Section: Static data used by the app (the list of date types and food choices) */
+  // ============ DATA ============ /* Section: Static data used by the app (the list of date types and food choices) */ 
   const DATE_TYPES = [ /* An array of date activity options shown in the date-type step. Each object has an emoji and a label. */
     { emoji: "🌅", label: "Sunset Picnic" },
     { emoji: "🎬", label: "Cozy Movie Night" },
@@ -24,7 +24,7 @@
     { emoji: "💗", label: "Me" }
   ];
 
-  // ============ DOM REFS ============ /* Section: Grabbing references to important HTML elements so we can manipulate them later */
+  // ============ DOM REFS ============ /* Section: Grabbing references to important HTML elements so we can manipulate them later */ 
   const $ = (sel) => document.querySelector(sel); /* A shorthand helper function. $("selector") is the same as document.querySelector("selector") — it finds the first HTML element matching the CSS selector and returns it. */
   const stepLanding = $("#step-landing"); /* Grabs the Step 1 (landing) section element by its id */
   const stepDate = $("#step-date"); /* Grabs the Step 2 (pick date type) section element */
@@ -58,15 +58,15 @@
   const noOriginalNext = btnNo.nextSibling; /* Saves a reference to the next neighbor of the "No" button, so we can restore its exact original position */
   const noMessage = $("#no-message"); /* Grabs the paragraph where sad messages appear when the user presses "No" */
 
-  // ============ AUTO-FORGING CACHE (REMEMBER + ASSET CACHE) ============ /* Section: Saves the user's selections in the browser (localStorage) and preloads/caches the GIFs so they load instantly */
+  // ============ AUTO-FORGING CACHE (REMEMBER + ASSET CACHE) ============ /* Section: Saves the user's selections in the browser (localStorage) and preloads/caches the GIFs so they load instantly */ 
   const CACHE_KEY = "willYouBeMyDate"; /* A single key string used to store the whole user state object in the browser's localStorage */
 
   function cacheGifs() { /* Defines a function that preloads all the GIF files into the browser's memory/cache so they appear instantly */
     const gifs = [ /* An array of the GIF image paths used across the app */
-      "dudu-flow-kiss-cute-dudu.gif", /* The kiss GIF for the date/time steps */
-      "cuddle-cute.gif", /* The hug GIF for the success page */
-      "sad-cry.gif", /* The crying GIF for the "No" button messages */
-      "bubu-dudu.gif" /* The extra cute GIF */
+      "gif/dudu-flow-kiss-cute-dudu.gif", /* The kiss GIF for the date/time steps */
+      "gif/cuddle-cute.gif", /* The hug GIF for the success page */
+      "gif/sad-cry.gif", /* The crying GIF for the "No" button messages */
+      "gif/bubu-dudu.gif" /* The extra cute GIF */
     ];
     gifs.forEach((src) => { /* Loops through every GIF path */
       const img = new Image(); /* Creates a new in-memory Image object (this triggers the browser to load/cache the file) */
@@ -132,9 +132,9 @@
     else if (pickedDay) goToStep(stepTime); /* Else if they picked a day, return to the time step */
     else if (pickedDate) goToStep(stepCalendar); /* Else if they picked a date type, return to the calendar step */
   }
-  //restoreState(); /* Immediately call restoreState when the script loads to bring back any saved progress */
+  //restoreState(); /* Immediately call restoreState when the script loads to bring back any saved progress */ 
 
-  // ============ FLOATING BACKGROUND (LESSENED) ============ /* Section: Code that creates the floating hearts, sparkles, balloons, and butterflies — reduced for a cleaner look */
+  // ============ FLOATING BACKGROUND (LESSENED) ============ /* Section: Code that creates the floating hearts, sparkles, balloons, and butterflies — reduced for a cleaner look */ 
   const BG_ITEMS = [ /* An array of all possible floating background items. Each has an emoji and a CSS class to apply. */
     { emoji: "💖", cls: "heart" }, /* Pink heart */
     { emoji: "💗", cls: "heart" }, /* Growing heart */
@@ -166,7 +166,7 @@
 
   for (let i = 0; i < 8; i++) setTimeout(spawnFloat, i * 250); /* Immediately spawns only 8 initial floating items (was 30 before), staggered 250ms apart */
 
-  // ============ TWINKLING STAR FIELD ============ /* Section: Code that creates the small twinkling stars scattered in the background */
+  // ============ TWINKLING STAR FIELD ============ /* Section: Code that creates the small twinkling stars scattered in the background */ 
   function seedStars() { /* Defines a function that creates the initial field of fixed background stars */
     for (let i = 0; i < 15; i++) { /* Loops 15 times to create 15 stars (was 34 before, reduced for a cleaner look) */
       const star = document.createElement("div"); /* Creates a new <div> element in memory for one star */
@@ -182,7 +182,7 @@
   }
   seedStars(); /* Immediately calls the seedStars function to create all 15 stars when the script loads */
 
-  // ============ CURSOR SPARKLES ============ /* Section: Code that spawns little sparkles that follow the user's mouse cursor */
+  // ============ CURSOR SPARKLES ============ /* Section: Code that spawns little sparkles that follow the user's mouse cursor */ 
   let lastSpark = 0; /* Records the timestamp of the last sparkle we created, used to throttle how fast sparkles spawn */
 
   document.addEventListener("pointermove", (e) => { /* Listens for any mouse/touch/stylus movement anywhere on the page */
@@ -208,7 +208,7 @@
     setTimeout(() => s.remove(), 950); /* Schedules the sparkle to be deleted from the page after 950ms (after its transition finishes) */
   }, { passive: true }); /* "passive: true" tells the browser we won't call preventDefault, allowing for smoother performance */
 
-  // ============ NO BUTTON DODGE + YES GROWTH ============ /* Section: The fun interaction where the "No" button runs away and the "Yes" button grows bigger */
+  // ============ NO BUTTON DODGE + YES GROWTH ============ /* Section: The fun interaction where the "No" button runs away and the "Yes" button grows bigger */ 
   const NO_CRIES = [ /* An array of sad messages that appear in order (or cycling) when the user presses "No" repeatedly — the messages STILL say "No" but are pleading/dramatic */
     "No?! Hmm… let me try again 🤔", /* Message shown the 1st time "No" is pressed */
     "Are you sure about that? 👀", /* Message shown the 2nd time */
@@ -264,10 +264,10 @@
   }
 
   function dodgeNoButton() { /* Defines the main function that makes the "No" button jump away from the cursor */
-    // Move the button to <body> so `position: fixed` uses the real viewport,
-    // not the card (whose backdrop-filter would trap it as a containing block).
-    // (Explanation: the card has a backdrop-filter which turns it into a "containing block" for fixed elements,
-    //  meaning `position: fixed` would be relative to the card instead of the screen. Moving to body fixes this.)
+    // Move the button to <body> so `position: fixed` uses the real viewport, 
+    // not the card (whose backdrop-filter would trap it as a containing block). 
+    // (Explanation: the card has a backdrop-filter which turns it into a "containing block" for fixed elements, 
+    //  meaning `position: fixed` would be relative to the card instead of the screen. Moving to body fixes this.) 
     if (!noOnBody) { /* Checks if the button has NOT yet been moved to the body */
       noOnBody = true; /* Sets the flag to true so we only do this once (don't move it repeatedly) */
       document.body.appendChild(btnNo); /* Actually moves the "No" button from its original card location into the <body> element */
@@ -292,7 +292,7 @@
     btnNo.style.top = y + "px"; /* Sets the button's top position in pixels */
     btnNo.style.transform = "rotate(" + (Math.random() * 30 - 15) + "deg)"; /* Tilts the button at a random angle between -15 and +15 degrees for a playful look */
 
-    noCount++; /* Increments the counter for how many times "No" has been pressed */
+    noCount++; /* Increments the counter for how many times "No" is dodged */
     const rect = btnNo.getBoundingClientRect(); /* Gets the button's current bounding rectangle (position and size relative to the viewport) */
     cryBurst(rect.left + rect.width / 2, rect.top); /* Fires a burst of tears from the top-center of the button (touched by the cursor) */
     updateNoMessages(); /* Updates the sad message, the GIF, and the button's changing label */
@@ -308,7 +308,7 @@
   btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); dodgeNoButton(); }, { passive: false }); /* On mobile: when the user touches the button, prevent the default action and dodge. passive:false is required so we can call preventDefault */
   btnNo.addEventListener("click", dodgeNoButton); /* As a fallback (in case the button doesn't dodge in time), clicking it also triggers the dodge */
 
-  // ============ STEP NAVIGATION ============ /* Section: Logic for moving between the steps of the app */
+  // ============ STEP NAVIGATION ============ /* Section: Logic for moving between the steps of the app */ 
   const steps = [stepLanding, stepDate, stepCalendar, stepTime, stepFood, stepResult]; /* An array holding references to all step sections in order */
 
   function resetNoButton() { /* Defines a function that puts the "No" button back in its original home in the landing card and clears its floating style, so it only exists on Step 1 */
@@ -332,7 +332,7 @@
 
   btnYes.addEventListener("click", () => goToStep(stepDate)); /* When the user clicks the "Yes" button, navigate from the landing page to the date type selection step */
 
-  // ============ OPTIONS GRID ============ /* Section: Code that builds the clickable option cards (date types and food types) */
+  // ============ OPTIONS GRID ============ /* Section: Code that builds the clickable option cards (date types and food types) */ 
   function buildOptions(container, data, onPick, type) { /* Defines a reusable function to generate option buttons. Args: container (HTML element), data (array of options), onPick (callback run when an option is picked), type (string key for the data attribute) */
     container.innerHTML = ""; /* Clears the container of any existing content so we start fresh (in case of rebuilds) */
     data.forEach((item) => { /* Loops through every item in the provided data array (e.g., each date type or food type) */
@@ -361,7 +361,7 @@
     saveState(); /* Auto-save the selection into localStorage so it's remembered on refresh */
   }, "date"); /* The data attribute key is "date" */
 
-  buildOptions(foodOptions, FOOD_TYPES, (label) => { /* Builds the food options. The callback runs when a food is picked: */
+  buildOptions(foodOptions, FOOD_TYPES, (label) => { /* Builds the food option buttons. The callback runs when a food is picked: */
     pickedFood = label; /* Save the picked food label into the pickedFood variable */
     btnFoodNext.disabled = false; /* Enable the "Confirm" button (it starts disabled) */
     saveState(); /* Auto-save the selection into localStorage */
@@ -372,13 +372,14 @@
   btnTimeBack.addEventListener("click", () => goToStep(stepCalendar)); /* When "Back" on the time step is clicked, go back to the calendar day step */
   btnFoodBack.addEventListener("click", () => goToStep(stepTime)); /* When "Back" on the food step is clicked, go back to the time step */
 
-  // ============ DATE & TIME PICKERS LOGIC ============ /* Section: Enabling the Continue buttons only after a valid date/time is chosen */
+  // ============ DATE & TIME PICKERS LOGIC ============ /* Section: Enabling the Continue buttons only after a valid date/time is chosen */ 
   datePicker.addEventListener("input", () => { /* Whenever the calendar date input changes: */
     if (datePicker.value) { /* If the user has actually selected a valid date (the input has a value): */
       pickedDay = datePicker.value; /* Save the selected calendar day string into the pickedDay variable */
       btnCalNext.disabled = false; /* Enable the "Continue" button on the calendar day step */
       saveState(); /* Auto-save the selection into localStorage */
     } else { /* If the user cleared the date: */
+      pickedDay = null; /* Clear the stored day too */
       btnCalNext.disabled = true; /* Keep the Continue button disabled until a valid date is picked again */
     }
   });
@@ -389,6 +390,7 @@
       btnTimeNext.disabled = false; /* Enable the "Continue" button on the time step */
       saveState(); /* Auto-save the selection into localStorage */
     } else { /* If the user cleared the time: */
+      pickedTime = null; /* Clear the stored time too */
       btnTimeNext.disabled = true; /* Keep the Continue button disabled until a valid time is picked again */
     }
   });
@@ -401,6 +403,7 @@
     $("#result-time").textContent = formatTime(pickedTime); /* Fill the "The time" summary value with the formatted time (e.g., "5:30 PM") */
     $("#result-food").textContent = pickedFood; /* Fill the "Our food" summary value with the picked food label */
     goToStep(stepResult); /* Navigate to the result step */
+    saveState(); /* Save the completed plan into localStorage */
     burstConfetti(); /* Fire a confetti celebration (defined below) */
   });
 
@@ -411,14 +414,14 @@
   }
 
   function formatTime(timeStr) { /* Defines a helper function that turns a raw time string (HH:MM) into a 12-hour format like "5:30 PM" */
-    if (!timeStr) return "—"; /* If there's no time, just show a dash placeholder */
+    if (!timeStr) return "—"; /* If there's no time (shouldn't happen after picking), just show a dash placeholder */
     const [h, m] = timeStr.split(":").map(Number); /* Splits the "HH:MM" string on the colon and converts both parts to numbers */
     const suffix = h >= 12 ? "PM" : "AM"; /* Determines if the hour is in the afternoon (PM) or morning (AM) */
     const hour12 = ((h + 11) % 12) + 1; /* Converts the 24-hour hour to 12-hour format (e.g., 13 → 1, 0 → 12) */
     return hour12 + ":" + (m < 10 ? "0" + m : m) + " " + suffix; /* Builds the final string like "5:30 PM", padding single-digit minutes with a leading zero */
   }
 
-  // ============ CONFETTI ============ /* Section: The confetti celebration that fires on the result page */
+  // ============ CONFETTI ============ /* Section: The confetti celebration that fires on the result page */ 
   const COLORS = ["#FF8FAB", "#FFB3C6", "#FFC2D1", "#F48FB1", "#D96C9D", "#FFFFFF", "#FFCCD5"]; /* An array of colorful hex colors for the confetti pieces */
 
   function burstConfetti() { /* Defines a function that spawns confetti pieces falling from the top */
@@ -440,7 +443,7 @@
     }
   }
 
-  // ============ SAVE PLAN TO SYSTEM (HTML + TXT) ============ /* Section: Writes the user's final date plan out as a real .html file and a real .txt file into a folder they choose */
+  // ============ SAVE PLAN TO SYSTEM (HTML + TXT) ============ /* Section: Writes the user's final date plan out as a real .html file and a real .txt file into a folder they choose */ 
   function buildTxtContent() { /* Defines a function that builds the plain-text version of the date plan */
     const dateLabel = pickedDate || "—"; /* The chosen date-type label (or a dash if missing) */
     const dayLabel = formatDay(pickedDay); /* The formatted calendar day (e.g. "Mon, Sep 7") */
@@ -467,34 +470,34 @@
     const dayLabel = formatDay(pickedDay); /* The formatted calendar day */
     const timeLabel = formatTime(pickedTime); /* The formatted time */
     const foodLabel = pickedFood || "—"; /* The chosen food label */
-    return `<!DOCTYPE html> <!-- The saved plan is itself a valid HTML document -->
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Date Plan 💕</title>
-  <style>
-    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #ffd6e7, #ffe6f0); min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; padding: 20px; color: #3a1a33; }
-    .card { background: rgba(255,255,255,0.85); border-radius: 24px; padding: 40px; max-width: 480px; width: 100%; box-shadow: 0 20px 50px rgba(179,47,122,0.3); text-align: center; }
-    h1 { font-size: 34px; margin: 0 0 6px; }
-    h2 { font-size: 20px; font-weight: 600; opacity: 0.8; margin: 0 0 24px; }
-    .row { background: rgba(255,77,136,0.08); border: 2px solid rgba(255,77,136,0.2); border-radius: 14px; padding: 14px; margin: 10px 0; }
-    .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.6; }
-    .value { font-size: 22px; font-weight: 800; color: #7b2b6e; margin-top: 4px; }
-    .love { font-size: 28px; font-weight: bold; margin-top: 18px; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>Yayyy! I can't wait! 💫</h1>
-    <h2>Here's our perfect plan…</h2>
-    <div class="row"><div class="label">Our date</div><div class="value">${dateLabel}</div></div>
-    <div class="row"><div class="label">The day</div><div class="value">${dayLabel}</div></div>
-    <div class="row"><div class="label">The time</div><div class="value">${timeLabel}</div></div>
-    <div class="row"><div class="label">Our food</div><div class="value">${foodLabel}</div></div>
-    <div class="love">Thank you for saying yes,<br/>I love you ❤️</div>
-  </div>
-</body>
+    return `<!DOCTYPE html> <!-- The saved plan is itself a valid HTML document --> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <title>Our Date Plan 💕</title> 
+  <style> 
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #ffd6e7, #ffe6f0); min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; padding: 20px; color: #3a1a33; } 
+    .card { background: rgba(255,255,255,0.85); border-radius: 24px; padding: 40px; max-width: 480px; width: 100%; box-shadow: 0 20px 50px rgba(179,47,122,0.3); text-align: center; } 
+    h1 { font-size: 34px; margin: 0 0 6px; } 
+    h2 { font-size: 20px; font-weight: 600; opacity: 0.8; margin: 0 0 24px; } 
+    .row { background: rgba(255,77,136,0.08); border: 2px solid rgba(255,77,136,0.2); border-radius: 14px; padding: 14px; margin: 10px 0; } 
+    .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.6; } 
+    .value { font-size: 22px; font-weight: 800; color: #7b2b6e; margin-top: 4px; } 
+    .love { font-size: 28px; font-weight: bold; margin-top: 18px; } 
+  </style> 
+</head> 
+<body> 
+  <div class="card"> 
+    <h1>Yayyy! I can't wait! 💫</h1> 
+    <h2>Here's our perfect plan…</h2> 
+    <div class="row"><div class="label">Our date</div><div class="value">${dateLabel}</div></div> 
+    <div class="row"><div class="label">The day</div><div class="value">${dayLabel}</div></div> 
+    <div class="row"><div class="label">The time</div><div class="value">${timeLabel}</div></div> 
+    <div class="row"><div class="label">Our food</div><div class="value">${foodLabel}</div></div> 
+    <div class="love">Thank you for saying yes,<br/>I love you ❤️</div> 
+  </div> 
+</body> 
 </html>`; /* Returns the complete HTML string built with the user's chosen values */
   }
 
@@ -529,7 +532,7 @@
 
   btnSavePlan.addEventListener("click", savePlanFiles); /* When "Save my plan" is clicked, calls savePlanFiles to write the files */
 
-  // ============ RESTART ============ /* Section: Logic for resetting the app when the "Start over" button is clicked */
+  // ============ RESTART ============ /* Section: Logic for resetting the app when the "Start over" button is clicked */ 
   btnRestart.addEventListener("click", () => { /* When "Start over" is clicked: */
     pickedDate = null; /* Reset the picked date type to null (nothing selected) */
     pickedDay = null; /* Reset the picked calendar day to null (nothing selected) */
@@ -554,8 +557,8 @@
     goToStep(stepLanding); /* Navigate back to the landing page (the very first step) */
   });
 
-  // ============ RESPONSIVE RESCUE ============ /* Section: Keeps the dodging "No" button on-screen if the window is resized */
-  // Keep the "No" button safely on screen if the window resizes while it's dodging.
+  // ============ RESPONSIVE RESCUE ============ /* Section: Keeps the dodging "No" button on-screen if the window is resized */ 
+  // Keep the "No" button safely on screen if the window resizes while it's dodging. 
   window.addEventListener("resize", () => { /* Listens for the browser window being resized */
     if (!btnNo.classList.contains("fixed")) return; /* If the "No" button isn't currently in its floating/fixed state, do nothing (no need to reposition it) */
     const btnW = Math.max(btnNo.offsetWidth, 80); /* Get the button width, but ensure it's at least 80px (protects against measuring 0 before render) */
@@ -566,4 +569,5 @@
     btnNo.style.left = x + "px"; /* Apply the corrected left position */
     btnNo.style.top = y + "px"; /* Apply the corrected top position */
   });
+
 })(); /* This closes the IIFE (Immediately Invoked Function Expression). Everything above runs safely inside its own scope and is not accessible globally. */
